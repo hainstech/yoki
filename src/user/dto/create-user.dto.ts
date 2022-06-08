@@ -1,5 +1,10 @@
+import { UserType } from 'src/types';
+
 export class CreateUserDto {
-  name: string;
   email: string;
+  type: UserType;
   password: string;
+  roleId: string;
+  patientId: string;
+  professionalId: string;
 }
