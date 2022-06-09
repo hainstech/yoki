@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getStatus()).toBe('API Running - GSCI');
+      expect(appController.getStatus()).toBe('٩(◕‿◕)۶ API is up');
     });
   });
 });
