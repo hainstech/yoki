@@ -2,6 +2,8 @@
 
 ![test badge](https://github.com/hainstech/yoki/actions/workflows/node-test.yml/badge.svg)
 
+[Wiki](https://github.com/hainstech/yoki/wiki)
+
 A universal back-end for medical research.
 
 ## Philosophy
