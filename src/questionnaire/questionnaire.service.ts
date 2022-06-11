@@ -24,14 +24,14 @@ export class QuestionnaireService {
     return this.questionnaireModel.findOne({ _id: id });
   }
 
-  update(id: number, updateQuestionnaireDto: UpdateQuestionnaireDto) {
+  update(id: string, updateQuestionnaireDto: UpdateQuestionnaireDto) {
     return this.questionnaireModel.updateOne({
       _id: id,
       updateQuestionnaireDto,
     });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.questionnaireModel.remove({ _id: id });
   }
 }
