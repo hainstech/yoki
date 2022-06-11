@@ -7,10 +7,10 @@ export type QuestionnaireDocument = Questionnaire & Document;
 
 @Schema()
 export class Questionnaire {
-  @Prop({ required: true })
+  @Prop({ required: true, type: mongoose.SchemaTypes.Mixed })
   schema: JSONSchema7;
 
-  @Prop({ required: true })
+  @Prop({ required: true, type: mongoose.SchemaTypes.Mixed })
   uischema: UiSchema;
 
   @Prop({ required: true })
