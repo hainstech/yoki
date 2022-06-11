@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
 import { UpdateQuestionnaireDto } from './dto/update-questionnaire.dto';
+import { Questionnaire, QuestionnaireDocument } from './questionnaire.schema';
 
 @Injectable()
 export class QuestionnaireService {
+  constructor(
+    @InjectModel(Questionnaire.name)
+    private questionnaireModel: Model<QuestionnaireDocument>
+  ) {}
+
   create(createQuestionnaireDto: CreateQuestionnaireDto) {
-    return 'This action adds a new questionnaire';
+    return this.questionnaireModel.create(createQuestionnaireDto);
   }
 
   findAll() {
-    return `This action returns all questionnaire`;
+    return this.questionnaireModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} questionnaire`;
+  findOne(id: string) {
+    return this.questionnaireModel.findOne({ _id: id });
   }
 
   update(id: number, updateQuestionnaireDto: UpdateQuestionnaireDto) {
-    return `This action updates a #${id} questionnaire`;
+    return this.questionnaireModel.updateOne({
+      _id: id,
+      updateQuestionnaireDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} questionnaire`;
+    return this.questionnaireModel.remove({ _id: id });
   }
 }
