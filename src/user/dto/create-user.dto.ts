@@ -5,6 +5,6 @@ export class CreateUserDto {
   type: UserType;
   password: string;
   roleId: string;
-  patientId: string;
-  professionalId: string;
+  patientId: string | null;
+  professionalId: string | null;
 }

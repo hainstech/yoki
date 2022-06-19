@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { PatientModule } from './patient/patient.module';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 import { LoggerMiddleware } from 'middleware/request-logging';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,10 +15,14 @@ import { LoggerMiddleware } from 'middleware/request-logging';
       envFilePath: ['.env.development', '.env.production'],
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.DATABASE_URI),
+    MongooseModule.forRoot(process.env.DATABASE_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }),
     UserModule,
     PatientModule,
     QuestionnaireModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

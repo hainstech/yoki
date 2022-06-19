@@ -2,8 +2,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 import { Patient } from '../patient/patient.schema';
 import { UserType } from 'src/types';
+import * as bcrypt from 'bcrypt';
 
 export type UserDocument = User & Document;
+
+// Authentication from https://mohaned-benmansour.medium.com/jwt-authentication-using-node-nestjs-mongoose-passport-ionic5-part1-bd07becc7a52
 
 @Schema()
 export class User {
@@ -20,10 +23,24 @@ export class User {
   roleId: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Patient' })
-  patientId: Patient;
+  patientId: string | null;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Patient' })
-  professionalId: string;
+  professionalId: string | null;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(User).pre(
+  'save',
+  async function (next) {
+    try {
+      if (!this.isModified('password')) {
+        return next();
+      }
+      const hashed = await bcrypt.hash(this['password'], 10);
+      this['password'] = hashed;
+      return next();
+    } catch (err) {
+      return next(err);
+    }
+  }
+);
