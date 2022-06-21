@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 export type UserType = 'researcher' | 'patient' | 'clinician';
 
@@ -27,4 +27,10 @@ export interface FilledQuestionnaire {
   questionnaire: mongoose.Schema.Types.ObjectId;
   time: Date;
   answers: Array<any>;
+}
+
+export interface Payload {
+  id: Types.ObjectId;
+  email: string;
+  type: UserType;
 }
