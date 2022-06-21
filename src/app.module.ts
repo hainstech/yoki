@@ -8,6 +8,7 @@ import { PatientModule } from './patient/patient.module';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module';
 import { LoggerMiddleware } from 'middleware/request-logging';
 import { AuthModule } from './auth/auth.module';
+import { CarerModule } from './carer/carer.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
     PatientModule,
     QuestionnaireModule,
     AuthModule,
+    CarerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

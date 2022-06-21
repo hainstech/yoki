@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { FilledQuestionnaire } from 'src/types';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { Patient, PatientDocument } from './patient.schema';
@@ -29,5 +30,14 @@ export class PatientService {
 
   remove(id: string) {
     return this.patientModel.deleteOne({ _id: id });
+  }
+
+  async pushFilledQuestionnaire(
+    id: string,
+    filledQuestionnaire: FilledQuestionnaire
+  ) {
+    const carer = await this.patientModel.findOne({ _id: id });
+    carer.filledQuestionnaires.push(filledQuestionnaire);
+    return carer.save();
   }
 }
