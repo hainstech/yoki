@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { PatientModule } from './patient/patient.module';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module';
-import { LoggerMiddleware } from 'middleware/request-logging';
+import { LoggerMiddleware } from 'middleware/logger';
 import { AuthModule } from './auth/auth.module';
 import { CarerModule } from './carer/carer.module';
 

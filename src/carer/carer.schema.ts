@@ -12,7 +12,7 @@ export class Carer {
   @Prop({ required: true })
   language: String;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true })
   userId: string;
 
   @Prop()

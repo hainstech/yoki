@@ -3,6 +3,7 @@ import { CarerService } from 'src/carer/carer.service';
 import { CreateCarerDto } from 'src/carer/dto/create-carer.dto';
 import { CreatePatientDto } from 'src/patient/dto/create-patient.dto';
 import { PatientService } from 'src/patient/patient.service';
+import { Payload, UserRole } from 'src/types';
 import { UserService } from 'src/user/user.service';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -19,39 +20,38 @@ export class AuthController {
   @Post('carer')
   async registerCarer(@Body() createCarerDto: CreateCarerDto) {
     const { user } = await this.carerService.create(createCarerDto);
-    let saneUser = this.userService.sanitizeUser(user);
     const payload = {
       id: user._id,
-      type: user.type,
+      role: user.role as UserRole,
       email: user.email,
     };
-
+    delete user.password;
     const token = await this.authService.signPayload(payload);
-    return { saneUser, token };
+    return { user, token };
   }
 
-  @Post('carer')
+  @Post('patient')
   async registerPatient(@Body() createPatientDto: CreatePatientDto) {
     const { user } = await this.patientService.create(createPatientDto);
-    let saneUser = this.userService.sanitizeUser(user);
     const payload = {
       id: user._id,
-      type: user.type,
+      role: user.role as UserRole,
       email: user.email,
     };
-
+    delete user.password;
     const token = await this.authService.signPayload(payload);
-    return { saneUser, token };
+    return { user, token };
   }
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     const user = await this.userService.findByLogin(loginDto);
-    const payload = {
+    const payload: Payload = {
       id: user._id,
-      type: user.type,
+      role: user.role as UserRole,
       email: user.email,
     };
+    delete user.password;
     const token = await this.authService.signPayload(payload);
     return { user, token };
   }

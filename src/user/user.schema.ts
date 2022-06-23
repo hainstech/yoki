@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { UserType } from 'src/types';
+import { UserRole } from 'src/types';
 import * as bcrypt from 'bcrypt';
 
 export type UserDocument = User & Document;
@@ -13,7 +13,7 @@ export class User {
   email: string;
 
   @Prop({ required: true })
-  type: UserType;
+  role: UserRole;
 
   @Prop({ required: true })
   password: string;

@@ -1,6 +1,6 @@
 import mongoose, { Types } from 'mongoose';
 
-export type UserType = 'researcher' | 'patient' | 'carer';
+export type UserRole = 'researcher' | 'patient' | 'carer';
 
 export type UiSchema = {
   'ui:field'?: string;
@@ -32,5 +32,5 @@ export interface FilledQuestionnaire {
 export interface Payload {
   id: Types.ObjectId;
   email: string;
-  type: UserType;
+  role: UserRole;
 }

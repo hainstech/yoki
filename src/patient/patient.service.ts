@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { FilledQuestionnaire } from 'src/types';
@@ -17,14 +17,17 @@ export class PatientService {
   ) {}
 
   async create(createPatientDto: CreatePatientDto) {
-    const createdPatient = new this.patientModel(createPatientDto);
-    const user = new this.userModel({ ...createPatientDto, role: 'patient' });
-    createdPatient.userId = user._id.toString();
-    await createdPatient.save();
-    user.patientId = createdPatient._id.toString();
-    await user.save();
-
-    return { createdPatient, user };
+    try {
+      const createdPatient = new this.patientModel(createPatientDto);
+      const user = new this.userModel({ ...createPatientDto, role: 'patient' });
+      createdPatient.userId = user._id.toString();
+      await createdPatient.save();
+      user.patientId = createdPatient._id.toString();
+      await user.save();
+      return { createdPatient, user };
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
   findAll() {

@@ -1,8 +1,8 @@
-import { UserType } from 'src/types';
+import { UserRole } from 'src/types';
 
 export class CreateUserDto {
   email: string;
-  type: UserType;
+  role: UserRole;
   password: string;
   patientId: string | null;
   professionalId: string | null;
