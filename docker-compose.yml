@@ -1,3 +1,4 @@
+# https://dev.to/erezhod/setting-up-a-nestjs-project-with-docker-for-back-end-development-30lg
 version: '3.8'
 
 services:
@@ -7,7 +8,7 @@ services:
     build:
       context: .
       target: development
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.local
     command: npm run start:debug
     ports:
       - 3000:3000
@@ -27,7 +28,7 @@ services:
     build:
       context: .
       target: production
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.local
     command: npm run start:prod
     ports:
       - 3000:3000

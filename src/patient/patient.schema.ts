@@ -13,10 +13,10 @@ export class Patient {
   dob: Date;
 
   @Prop({ required: true })
-  gender: String;
+  gender: string;
 
   @Prop({ required: true })
-  language: String;
+  language: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true })
   userId: string;

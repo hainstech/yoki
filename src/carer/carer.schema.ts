@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document, ObjectId } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { FilledQuestionnaire } from 'src/types';
 
 export type CarerDocument = Carer & Document;
@@ -10,7 +10,7 @@ export class Carer {
   name: string;
 
   @Prop({ required: true })
-  language: String;
+  language: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true })
   userId: string;

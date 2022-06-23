@@ -1,17 +1,13 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
   Delete,
   UseGuards,
-  Request,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { SelfCarerAuthGuard } from 'src/auth/carer.guard';
-import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { CarerService } from './carer.service';
 import { UpdateCarerDto } from './dto/update-carer.dto';
 
@@ -21,23 +17,19 @@ export class CarerController {
 
   @UseGuards(SelfCarerAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string, @Request() req) {
+  findOne(@Param('id') id: string) {
     return this.carerService.findOne(id);
   }
 
   @UseGuards(SelfCarerAuthGuard)
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateCarerDto: UpdateCarerDto,
-    @Request() req
-  ) {
+  update(@Param('id') id: string, @Body() updateCarerDto: UpdateCarerDto) {
     return this.carerService.update(id, updateCarerDto);
   }
 
   @UseGuards(SelfCarerAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string, @Request() req) {
+  remove(@Param('id') id: string) {
     return this.carerService.remove(id);
   }
 }

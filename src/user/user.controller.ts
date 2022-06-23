@@ -6,11 +6,9 @@ import {
   Param,
   Delete,
   UseGuards,
-  Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { SelfUserAuthGuard } from 'src/auth/user.guard';
 
 @Controller('user')

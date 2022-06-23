@@ -18,3 +18,4 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - run: yarn ci:test
+      - run: yarn lint
