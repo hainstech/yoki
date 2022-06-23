@@ -12,12 +12,6 @@ import { Payload } from 'src/types';
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async create(createUserDto: CreateUserDto) {
-    const createdUser = new this.userModel(createUserDto);
-    await createdUser.save();
-    return this.sanitizeUser(createdUser);
-  }
-
   findAll() {
     return this.userModel.find();
   }

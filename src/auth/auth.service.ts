@@ -8,7 +8,6 @@ export class AuthService {
   constructor(private userService: UserService) {}
 
   async signPayload(payload: Payload) {
-    // TODO: expiration
     return sign(payload, process.env.SECRET_KEY);
   }
 

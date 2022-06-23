@@ -16,24 +16,6 @@ import { FilledQuestionnaire } from 'src/types';
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
 
-  @Post()
-  create(@Body() createPatientDto: CreatePatientDto) {
-    return this.patientService.create(createPatientDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.patientService.findAll();
-  }
-
-  @Post('/filledQuestionnaire/:id')
-  pushFilledQuestionnaire(
-    @Param('id') id: string,
-    @Body() filledQuestionnaire: FilledQuestionnaire
-  ) {
-    return this.patientService.pushFilledQuestionnaire(id, filledQuestionnaire);
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.patientService.findOne(id);

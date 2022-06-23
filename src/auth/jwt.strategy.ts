@@ -6,7 +6,7 @@ import { Strategy } from 'passport-jwt';
 import { AuthService } from './auth.service';
 
 // The guard using the JWT Strategy.
-// You can use it with: @UseGuards(AuthGuard('jwt'))
+// You can use it with: @UseGuards(JwtAuthGuard))
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {

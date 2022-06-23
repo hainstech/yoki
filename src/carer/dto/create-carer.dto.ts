@@ -1,1 +1,9 @@
-export class CreateCarerDto {}
+import { FilledQuestionnaire } from 'src/types';
+import { RegisterUserDto } from 'src/user/dto/create-user.dto';
+
+export class CreateCarerDto extends RegisterUserDto {
+  name: string;
+  language: String;
+  user: string;
+  filledQuestionnaires: Array<FilledQuestionnaire>;
+}

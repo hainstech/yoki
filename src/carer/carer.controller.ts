@@ -16,24 +16,6 @@ import { UpdateCarerDto } from './dto/update-carer.dto';
 export class CarerController {
   constructor(private readonly carerService: CarerService) {}
 
-  @Post()
-  create(@Body() createCarerDto: CreateCarerDto) {
-    return this.carerService.create(createCarerDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.carerService.findAll();
-  }
-
-  @Post('/filledQuestionnaire/:id')
-  pushFilledQuestionnaire(
-    @Param('id') id: string,
-    @Body() filledQuestionnaire: FilledQuestionnaire
-  ) {
-    return this.carerService.pushFilledQuestionnaire(id, filledQuestionnaire);
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.carerService.findOne(id);

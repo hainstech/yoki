@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { FilledQuestionnaire } from 'src/types';
+import { User, UserDocument } from 'src/user/user.schema';
+import { UserService } from 'src/user/user.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { Patient, PatientDocument } from './patient.schema';
@@ -9,11 +11,20 @@ import { Patient, PatientDocument } from './patient.schema';
 @Injectable()
 export class PatientService {
   constructor(
-    @InjectModel(Patient.name) private patientModel: Model<PatientDocument>
+    @InjectModel(Patient.name) private patientModel: Model<PatientDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private readonly userService: UserService
   ) {}
 
-  create(createPatientDto: CreatePatientDto) {
-    return this.patientModel.create(createPatientDto);
+  async create(createPatientDto: CreatePatientDto) {
+    const createdPatient = new this.patientModel(createPatientDto);
+    const user = new this.userModel({ ...createPatientDto, role: 'patient' });
+    createdPatient.userId = user._id.toString();
+    await createdPatient.save();
+    user.patientId = createdPatient._id.toString();
+    await user.save();
+
+    return { createdPatient, user };
   }
 
   findAll() {

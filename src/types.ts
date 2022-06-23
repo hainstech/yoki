@@ -1,6 +1,6 @@
 import mongoose, { Types } from 'mongoose';
 
-export type UserType = 'researcher' | 'patient' | 'clinician';
+export type UserType = 'researcher' | 'patient' | 'carer';
 
 export type UiSchema = {
   'ui:field'?: string;

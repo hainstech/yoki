@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { Patient } from '../patient/patient.schema';
 import { UserType } from 'src/types';
 import * as bcrypt from 'bcrypt';
 
@@ -13,20 +12,17 @@ export class User {
   @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop()
+  @Prop({ required: true })
   type: UserType;
 
-  @Prop()
+  @Prop({ required: true })
   password: string;
-
-  @Prop()
-  roleId: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Patient' })
   patientId: string | null;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Patient' })
-  professionalId: string | null;
+  carerId: string | null;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User).pre(
