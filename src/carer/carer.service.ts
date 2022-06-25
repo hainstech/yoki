@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { FilledQuestionnaire } from 'src/types';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User, UserDocument } from 'src/user/user.schema';
 import { Carer, CarerDocument } from './carer.schema';
@@ -45,5 +46,19 @@ export class CarerService {
 
   remove(id: string) {
     return this.carerModel.deleteOne({ _id: id });
+  }
+
+  async addQuestionnaires(
+    id: string,
+    questionnaires: Array<FilledQuestionnaire>
+  ) {
+    console.log(questionnaires);
+    const carer = await this.carerModel.findOne({ _id: id });
+    const carerQuestionnaires = carer.filledQuestionnaires;
+    const newQuestionnaires = [...carerQuestionnaires, ...questionnaires];
+    return this.carerModel.updateOne(
+      { _id: id },
+      { filledQuestionnaires: newQuestionnaires }
+    );
   }
 }

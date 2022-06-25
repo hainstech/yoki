@@ -26,7 +26,7 @@ export type UISchemaSubmitButtonOptions = {
 export interface FilledQuestionnaire {
   questionnaire: mongoose.Schema.Types.ObjectId;
   time: Date;
-  answers: Array<any>;
+  formData: Array<any>;
 }
 
 export interface Payload {
