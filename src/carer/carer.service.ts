@@ -52,7 +52,6 @@ export class CarerService {
     id: string,
     questionnaires: Array<FilledQuestionnaire>
   ) {
-    console.log(questionnaires);
     const carer = await this.carerModel.findOne({ _id: id });
     const carerQuestionnaires = carer.filledQuestionnaires;
     const newQuestionnaires = [...carerQuestionnaires, ...questionnaires];
