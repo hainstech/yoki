@@ -5,6 +5,8 @@
 # local database
 /data
 
+.env*
+
 # Logs
 logs
 *.log
