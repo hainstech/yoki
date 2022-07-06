@@ -5,7 +5,8 @@
 # local database
 /data
 
-.env*
+# environment variables
+.env.development
 
 # Logs
 logs
