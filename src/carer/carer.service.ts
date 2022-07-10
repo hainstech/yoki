@@ -54,7 +54,7 @@ export class CarerService {
   ) {
     const carer = await this.carerModel.findOne({ _id: id });
     const carerQuestionnaires = carer.filledQuestionnaires;
-    const newQuestionnaires = [...carerQuestionnaires, ...questionnaires];
+    const newQuestionnaires = carerQuestionnaires.concat(questionnaires);
     return this.carerModel.updateOne(
       { _id: id },
       { filledQuestionnaires: newQuestionnaires }
