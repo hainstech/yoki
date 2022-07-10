@@ -13,7 +13,7 @@ import { CarerModule } from './carer/carer.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ['.env.development', '.env.production'],
+      envFilePath: ['.env'],
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.DATABASE_URI, {
