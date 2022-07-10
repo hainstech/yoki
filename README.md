@@ -1,6 +1,7 @@
 # Yōki
 
-![test badge](https://github.com/hainstech/yoki/actions/workflows/node-test.yml/badge.svg)
+[![Cloud Run](https://github.com/hainstech/yoki/actions/workflows/google-cloudrun-source.yml/badge.svg?branch=main)](https://github.com/hainstech/yoki/actions/workflows/google-cloudrun-source.yml)
+![tests](https://github.com/hainstech/yoki/actions/workflows/node-test.yml/badge.svg)
 
 [Wiki](https://github.com/hainstech/yoki/wiki)
 
